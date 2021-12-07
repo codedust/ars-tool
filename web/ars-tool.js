@@ -37,7 +37,7 @@ fetch("ars_from_geojson.json").then(response => response.json()).then(function(r
 	// add the OpenStreetMap tiles and attribution
 	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		maxZoom: 19,
-		attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a> | Gebietsumrisse: <a href="https://geoportal.de/Info/2E26078A-4D60-43E2-9728-DDC001DAABC3">GeoBasis-DE / BKG 2021 (Datendarstellung verändert)</a> | <a href="https://okfn.de/impressum/">Impressum</a>'
+		attribution: 'Kartenmaterial &copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a> | Gebietsumrisse: <a href="https://geoportal.de/Info/2E26078A-4D60-43E2-9728-DDC001DAABC3">GeoBasis-DE / BKG 2021 (Datendarstellung verändert)</a> | ARS-Tool lizenziert unter <a href="https://github.com/codedust/ars-tool/blob/main/LICENSE.txt">EUPL 1.2</a> | <a href="https://github.com/codedust/ars-tool/">Quellcode</a>  | <a href="https://okfn.de/impressum/">Impressum</a>'
 	}).addTo(map);
 
 	// easteregg

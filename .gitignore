@@ -1,0 +1,4 @@
+# ignore geojson data
+data/
+web/geojson/
+web/ars_from_geojson.json

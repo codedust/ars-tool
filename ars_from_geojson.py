@@ -3,6 +3,8 @@ import json
 import sys
 from pyproj import Transformer
 
+# EPSG:25823 - coordinate system of source data set
+# EPSG:4326  - latitude/longitude coordinate system based on the Earth's center of mass, used by the GPS among others (default coordinate system of leaflet)
 transformer = Transformer.from_crs("epsg:25832", "epsg:4326")
 ars_dict = {}
 

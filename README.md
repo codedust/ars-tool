@@ -18,15 +18,15 @@ $ ./download_geojson.sh
 ```
 
 
-Next, update `web/ars_from_geojson.json` and all geojson files in `web/geojson/` by executing the `ars_from_geojson.py` script:
+Next, update `web/ars_from_geojson.json` and all geojson files in `web/geojson/` by executing the `convert_vz250.py` script:
 
 ```console
 $ poetry install
 $ poetry run python convert_vz250.py
 ```
 
-## Serving static contents
-The contents of the 'web/' directory can now be statically served.
+## Serving static content
+The content of the 'web/' directory can now be served statically.
 
 ```console
 $ cd web

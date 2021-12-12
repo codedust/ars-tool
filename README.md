@@ -22,7 +22,7 @@ Next, update `web/ars_from_geojson.json` and all geojson files in `web/geojson/`
 
 ```console
 $ poetry install
-$ poetry run python ars_from_geojson.py
+$ poetry run python convert_vz250.py
 ```
 
 ## Serving static contents

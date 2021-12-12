@@ -1,11 +1,7 @@
 import copy
 import json
 import sys
-from pyproj import Transformer
 
-# EPSG:25823 - coordinate system of source data set
-# EPSG:4326  - latitude/longitude coordinate system based on the Earth's center of mass, used by the GPS among others (default coordinate system of leaflet)
-transformer = Transformer.from_crs("epsg:25832", "epsg:4326")
 ars_dict = {}
 
 def insert_ars(ars_dict, ars, name):
@@ -25,7 +21,7 @@ GEOJSON_TEMPLATE = {
   "features": []
 }
 
-with open('data/wfs_vz250_1231.geojson') as file:
+with open('data/wfs_vz250_1231_epsg_4326.geojson') as file:
     data = json.load(file)
     for feature in data['features']:
         # add ars to ars dict
@@ -40,25 +36,18 @@ with open('data/wfs_vz250_1231.geojson') as file:
             continue
             # TODO: integrate water areas into land mass geojson files
 
+        # write geojson file for each ars
         geojson = copy.deepcopy(GEOJSON_TEMPLATE)
         geojson['features'] = [feature]
+
         ars = feature['properties']['ars_g']
-
-        assert len(geojson['features']) == 1
-
-        for i, polygon_coordinate_array in enumerate(geojson['features'][0]['geometry']['coordinates']):
-            for j, linear_ring_coordinate_array in enumerate(polygon_coordinate_array):
-                geojson['features'][0]['geometry']['coordinates'][i][j] = list(map(lambda x: transformer.transform(x[0], x[1])[::-1], geojson['features'][0]['geometry']['coordinates'][i][j]))
-
-        assert len(geojson['features'][0]['bbox']) == 4
-        bbox = geojson['features'][0]['bbox']
-        geojson['features'][0]['bbox'] = transformer.transform(bbox[0], bbox[1])[::-1] + transformer.transform(bbox[2], bbox[3])[::-1]
-
         filename = f'web/geojson/{ars}.geojson.json'
+
         with open(filename, 'w') as f:
             print(f"Writing {filename}")
             f.write(json.dumps(geojson))
 
+# write ars database
 filename = 'web/ars_from_geojson.json'
 with open(filename, 'w') as f:
     print(f"Writing {filename}")
